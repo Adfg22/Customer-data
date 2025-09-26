@@ -4,7 +4,7 @@
       "id": "TIMSAH19",
       "name": "مصطفى",
       "endDate": "2026-9-27",
-      "points": 1000,
+      "points": 500,
       "isVIP": true,
       "invites": 5,
       "gifts": ["عطر 50 مل", "كرت عضوية"]
@@ -13,7 +13,7 @@
       "id": "VIP2026",
       "name": "أحمد",
       "endDate": "2025-11-15",
-      "points": 80,
+      "points": 200,
       "isVIP": false,
       "invites": 2,
       "gifts": ["قسيمة خصم"]
@@ -22,4 +22,5 @@
     
   }
 }
+
 
