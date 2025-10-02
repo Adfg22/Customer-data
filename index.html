@@ -3,99 +3,73 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>بوابة مساهمين الرهوان — Dashboard</title>
+<title>بوابة مساهمين الرهوان — VIP Dashboard</title>
 
-<!-- استخدمت خطوط النظام لتبسيط التحميل، لكن يمكنك استبدالها بـ Google Font لاحقاً -->
 <style>
+  /* =========================
+     Dark Navy + Gold Theme
+     ========================= */
   :root{
-    --bg-1: #f5f9ff;        /* very soft blue */
-    --bg-2: #ffffff;        /* white card */
-    --accent-1: #3b82f6;    /* soft brand blue */
-    --accent-2: #60a5fa;    /* lighter blue */
-    --muted: #6b7280;       /* muted gray */
-    --silver: #e6eefc;      /* silver/soft */
-    --glass: rgba(255,255,255,0.6);
-    --shadow: 0 8px 30px rgba(20,40,80,0.06);
-    --radius-lg: 18px;
-    --radius-md: 12px;
-    --radius-sm: 8px;
+    --bg: #070816;           /* very dark navy */
+    --panel: #0f1724;        /* slightly lighter panel */
+    --card: linear-gradient(180deg,#0f1728,#0b1220);
+    --muted: #9aa4b2;
+    --text: #e6eef6;
+    --gold: #d4af37;         /* gold */
+    --gold-2: #f0c95a;      /* lighter gold gradient */
+    --glass: rgba(255,255,255,0.02);
+    --shadow: 0 12px 44px rgba(2,6,23,0.6);
+    --radius-lg: 14px;
     --transition: 300ms cubic-bezier(.2,.9,.2,1);
+    --max-points: 500; /* default max used for points progress (changeable) */
   }
 
-  /* ---- Base ---- */
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
     margin:0;
-    min-height:100vh;
-    background:
-      radial-gradient(1200px 400px at 10% 10%, rgba(96,165,250,0.08), transparent 12%),
-      radial-gradient(1000px 350px at 90% 90%, rgba(59,130,246,0.06), transparent 10%),
-      var(--bg-1);
-    color:#0f172a;
-    font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: "Cairo", Inter, "Segoe UI", Roboto, system-ui, -apple-system, sans-serif;
+    background: radial-gradient(900px 300px at 10% 10%, rgba(212,175,55,0.03), transparent 12%),
+                radial-gradient(800px 260px at 90% 90%, rgba(96,165,250,0.02), transparent 10%),
+                var(--bg);
+    color:var(--text);
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
-    padding:32px;
+    padding:28px;
     display:flex;
     justify-content:center;
   }
 
-  /* ---- Container ---- */
-  .wrap{
-    width:100%;
-    max-width:1200px;
-  }
+  /* container */
+  .wrap{ width:100%; max-width:1200px; }
 
-  /* ---- Header ---- */
-  header.app-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
-    margin-bottom:20px;
+  /* header */
+  header{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;
   }
-
-  .brand{
-    display:flex;
-    align-items:center;
-    gap:14px;
-  }
-  .brand .logo {
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo {
     width:56px;height:56px;border-radius:12px;
-    background: linear-gradient(135deg,var(--accent-1),var(--accent-2));
-    display:flex;align-items:center;justify-content:center;
-    box-shadow: 0 8px 30px rgba(59,130,246,0.18);
-    color:#fff;font-weight:700;font-size:18px;
+    background: linear-gradient(135deg,var(--gold),var(--gold-2));
+    display:flex;align-items:center;justify-content:center;color:#071122;font-weight:900;font-size:20px;
+    box-shadow: 0 8px 30px rgba(212,175,55,0.12);
   }
-  .brand h1{
-    margin:0;font-size:18px;font-weight:700;color:#0b1220;
-    letter-spacing:0.2px;
-  }
+  .brand h1{margin:0;font-size:18px;color:var(--text);letter-spacing:0.2px}
   .brand p{margin:0;font-size:12px;color:var(--muted)}
 
-  /* ---- Header controls ---- */
-  .header-actions{
-    display:flex;align-items:center;gap:12px;
-  }
+  .header-actions{display:flex;gap:10px;align-items:center}
   .search {
-    display:flex;align-items:center;gap:10px;
-    background:linear-gradient(180deg,var(--silver),#fff);
-    border-radius:999px;padding:8px 12px;border:1px solid rgba(15,23,42,0.04);
-    min-width:280px;box-shadow:var(--shadow);
+    display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.02);
+    border-radius:999px;padding:8px 12px;border:1px solid rgba(255,255,255,0.03);
+    min-width:260px;
   }
-  .search input{
-    border:0;background:transparent;outline:none;font-size:14px;color:#071133;
-    width:100%;
-  }
-  .toggle-theme{
-    background:transparent;border:1px solid rgba(15,23,42,0.06);padding:8px;border-radius:10px;
-    cursor:pointer;font-size:14px;color:var(--muted);
-    transition:all var(--transition);
-  }
-  .toggle-theme:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(59,130,246,0.06)}
+  .search input{background:transparent;border:0;outline:none;color:var(--text);font-size:14px}
 
-  /* ---- Main grid ---- */
+  .toggle-theme{
+    padding:8px 10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);cursor:pointer;background:transparent;color:var(--muted)
+  }
+
+  /* layout */
   main.grid{
     display:grid;
     grid-template-columns: 360px 1fr;
@@ -103,183 +77,173 @@
     align-items:start;
   }
 
-  /* ---- Left panel (controls) ---- */
+  /* left panel */
   .panel{
-    background:var(--bg-2);
-    border-radius:var(--radius-lg);
-    padding:22px;
-    box-shadow:var(--shadow);
-    border:1px solid rgba(15,23,42,0.03);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:var(--radius-lg); padding:20px; box-shadow:var(--shadow);
+    border:1px solid rgba(255,255,255,0.03);
   }
-  .panel h2{margin:0 0 10px;font-size:16px;color:#071133}
-  .panel p.lead{margin:0 0 18px;color:var(--muted);font-size:13px}
+  .panel h2{margin:0;color:var(--text);font-size:16px}
+  .panel p.lead{margin:8px 0 16px;color:var(--muted);font-size:13px}
 
-  .input-wrap{margin-bottom:12px}
   .input-wrap input{
-    width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);
-    background:linear-gradient(180deg,#fcfeff,var(--glass));font-size:14px;color:#071133;
-    transition:box-shadow var(--transition),border-color var(--transition);
+    width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);
+    background: rgba(255,255,255,0.01); color:var(--text); outline:none;
+    transition: box-shadow var(--transition), border-color var(--transition);
   }
-  .input-wrap input:focus{box-shadow:0 8px 22px rgba(59,130,246,0.08);border-color:var(--accent-1);outline:none}
+  .input-wrap input:focus{box-shadow: 0 10px 30px rgba(2,6,23,0.6); border-color: rgba(212,175,55,0.12)}
 
   .primary-btn{
-    width:100%;padding:12px;border-radius:12px;border:0;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
-    color:#fff;font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 8px 24px rgba(96,165,250,0.18);
-    transition:transform var(--transition),box-shadow var(--transition);
+    margin-top:8px;width:100%;padding:12px;border-radius:12px;border:0;background:linear-gradient(90deg,var(--gold),var(--gold-2));
+    color:#071122;font-weight:800;cursor:pointer;box-shadow:0 14px 40px rgba(212,175,55,0.08);
+    transition:transform var(--transition);
   }
-  .primary-btn:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(96,165,250,0.22)}
+  .primary-btn:hover{transform:translateY(-4px)}
 
-  .small-note{margin-top:10px;font-size:12px;color:var(--muted)}
+  .ghost-row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .ghost-btn{padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted);cursor:pointer}
 
-  /* ---- Right panel (dashboard) ---- */
-  .dashboard{
-    display:flex;flex-direction:column;gap:18px;
-  }
+  /* right panel/dashboard */
+  .dashboard{display:flex;flex-direction:column;gap:18px}
 
   /* member card */
   .member-card{
-    display:flex;align-items:flex-start;gap:18px;
-    background:linear-gradient(180deg,#ffffff, #fbfdff);
-    border-radius:var(--radius-lg);
-    padding:18px;border:1px solid rgba(15,23,42,0.04);
-    box-shadow: 0 14px 40px rgba(12,32,80,0.06);
+    display:flex;gap:18px;align-items:flex-start;padding:18px;border-radius:14px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid rgba(255,255,255,0.03); box-shadow: 0 18px 40px rgba(2,6,23,0.6);
   }
   .member-avatar{
-    width:84px;height:84px;border-radius:14px;background:linear-gradient(135deg,var(--accent-2),var(--accent-1));
-    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:20px;
-    box-shadow:0 10px 30px rgba(59,130,246,0.12);
+    width:88px;height:88px;border-radius:12px;background:linear-gradient(135deg,#071122,rgba(0,0,0,0.18));
+    display:flex;align-items:center;justify-content:center;font-weight:900;font-size:30px;color:var(--gold);
+    border: 1px solid rgba(212,175,55,0.08); box-shadow:0 12px 32px rgba(0,0,0,0.6);
     flex-shrink:0;
   }
-  .member-info h3{margin:0;font-size:18px;color:#071133}
-  .member-info .id{margin-top:6px;font-size:13px;color:var(--muted)}
+  .member-info h3{margin:0;font-size:18px;color:var(--text)}
+  .member-info .id{margin-top:6px;color:var(--muted);font-size:13px}
   .member-badges{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
 
-  .member-stats{
-    margin-top:12px;display:flex;gap:12px;flex-wrap:wrap;
-  }
+  .stat-row{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
   .stat{
-    background:linear-gradient(180deg,#f8fbff,#ffffff);
-    border-radius:12px;padding:12px;min-width:120px;text-align:center;border:1px solid rgba(15,23,42,0.03);
-    box-shadow:0 8px 24px rgba(12,32,80,0.04);
+    flex:1;min-width:120px;padding:12px;border-radius:10px;background:rgba(255,255,255,0.01);
+    border:1px solid rgba(255,255,255,0.03); text-align:center;
   }
-  .stat b{display:block;color:#0b1220;font-size:16px}
+  .stat b{display:block;color:var(--text);font-size:16px}
   .stat span{display:block;color:var(--muted);font-size:12px;margin-top:6px}
 
-  /* action row */
-  .action-row{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
-  .ghost-btn{
-    border-radius:12px;padding:10px 12px;border:1px solid rgba(15,23,42,0.06);background:transparent;color:#071133;cursor:pointer;
-    transition:all var(--transition);
+  /* progress circles container */
+  .progress-wrap{display:flex;gap:16px;align-items:center;margin-left:auto}
+  .progress{
+    width:86px;height:86px;position:relative;
+    display:flex;align-items:center;justify-content:center;
   }
-  .ghost-btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(59,130,246,0.06)}
+  .progress svg{transform:rotate(-90deg)}
+  .progress .label{
+    position:absolute;text-align:center;
+    color:var(--text);font-weight:800;font-size:12px;
+  }
+  .progress .sub{display:block;color:var(--muted);font-size:11px;font-weight:600;margin-top:4px}
 
-  /* features grid — modern card style */
-  .features-section{
-    background:linear-gradient(180deg,#ffffff,#fbfdff);
-    padding:18px;border-radius:var(--radius-lg);box-shadow:var(--shadow);border:1px solid rgba(15,23,42,0.03);
+  /* features */
+  .features{
+    padding:16px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+    border:1px solid rgba(255,255,255,0.03);box-shadow:var(--shadow);
   }
-  .features-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
-  .features-head h4{margin:0;font-size:15px}
+  .features-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
   .features-grid{
-    display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;
+    margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;
   }
-
   .feature-card{
-    display:flex;gap:12px;align-items:center;padding:14px;border-radius:12px;background:linear-gradient(180deg,#fff,#fbfdff);
-    border:1px solid rgba(15,23,42,0.03);box-shadow:0 8px 20px rgba(12,32,80,0.04);
-    transition:transform var(--transition),box-shadow var(--transition);
-    opacity:0;transform:translateY(18px); /* animated in via JS delays below */
+    display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:10px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0));
+    border:1px solid rgba(255,255,255,0.02); transition: transform var(--transition), box-shadow var(--transition);
+    opacity:0; transform:translateY(12px);
   }
-  .feature-card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 20px 40px rgba(59,130,246,0.07)}
+  .feature-card:hover{transform:translateY(-6px); box-shadow:0 18px 40px rgba(0,0,0,0.6)}
   .feature-icon{
-    min-width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent-2),var(--accent-1));
-    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px;box-shadow:0 8px 24px rgba(59,130,246,0.12);
+    width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-2));
+    display:flex;align-items:center;justify-content:center;color:#071122;font-weight:900;font-size:18px;
+    box-shadow:0 10px 30px rgba(212,175,55,0.08);flex-shrink:0;
   }
-  .feature-body h5{margin:0;font-size:14px;color:#071133}
+  .feature-body h5{margin:0;font-size:14px;color:var(--text)}
   .feature-body p{margin:6px 0 0;color:var(--muted);font-size:12px}
 
-  /* catalog (redeem) */
-  .redeem-panel{background:linear-gradient(180deg,#ffffff,#fbfdff);padding:18px;border-radius:14px;border:1px solid rgba(15,23,42,0.03);box-shadow:var(--shadow)}
-  .catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+  /* redeem / catalog */
+  .redeem{
+    padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0));
+    border:1px solid rgba(255,255,255,0.03);box-shadow:var(--shadow)
+  }
+  .catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:12px}
   .catalog-item{
-    background:linear-gradient(180deg,#fbfdff,#fff);padding:14px;border-radius:12px;border:1px solid rgba(15,23,42,0.03);
-    display:flex;flex-direction:column;gap:10px;box-shadow:0 8px 20px rgba(12,32,80,0.04);
-    transition:transform var(--transition),box-shadow var(--transition);
-    opacity:0;transform:translateY(16px);
+    padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0));
+    border:1px solid rgba(255,255,255,0.02);display:flex;flex-direction:column;gap:8px;opacity:0;transform:translateY(12px)
   }
-  .catalog-item h5{margin:0;font-size:14px;color:#071133}
-  .catalog-item p{margin:0;font-size:13px;color:var(--muted)}
-  .catalog-item .cost{font-weight:700;color:#0b1220}
-  .catalog-item button{
-    margin-top:8px;padding:10px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
-    color:#fff;font-weight:700;cursor:pointer;
-  }
-  .catalog-item:hover{transform:translateY(-6px);box-shadow:0 18px 44px rgba(59,130,246,0.08)}
+  .catalog-item h5{margin:0;color:var(--text);font-size:14px}
+  .catalog-item p{margin:0;color:var(--muted);font-size:13px}
+  .catalog-item .cost{font-weight:900;color:var(--gold)}
+  .catalog-item button{margin-top:8px;padding:8px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--gold),var(--gold-2));color:#071122;font-weight:800;cursor:pointer}
 
-  /* small responsive */
+  /* gifts panel */
+  .gifts{padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0));border:1px solid rgba(255,255,255,0.03)}
+  .gifts ul{margin:8px 0 0;padding-left:18px;color:var(--muted)}
+
+  /* reveal animation helper (JS sets delay) */
+  .reveal{animation:revealUp 560ms cubic-bezier(.2,.9,.2,1) forwards;opacity:0;transform:translateY(14px)}
+  @keyframes revealUp{to{opacity:1;transform:translateY(0)}}
+
+  /* responsive */
   @media (max-width:980px){
-    main.grid{grid-template-columns:1fr; padding-bottom:40px}
-    .search{min-width:160px}
+    main.grid{grid-template-columns:1fr}
+    .progress-wrap{display:none}
   }
-
-  /* subtle helper for progressive reveal via inline style animationDelay from JS */
-  .reveal-animate{animation:fadeUpEase 600ms cubic-bezier(.2,.9,.2,1) forwards}
-  @keyframes fadeUpEase{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
   <div class="wrap">
-
-    <!-- HEADER -->
-    <header class="app-header">
+    <!-- header -->
+    <header>
       <div class="brand">
         <div class="logo">R</div>
         <div>
           <h1>بوابة مساهمين الرهوان</h1>
-          <p class="muted">لوحة المساهمين — تجربة VIP حديثة</p>
+          <p class="muted">لوحة تحكم VIP — تصميم فاخر</p>
         </div>
       </div>
 
       <div class="header-actions">
-        <div class="search" title="بحث سريع">
+        <div class="search" title="بحث">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="opacity:.8">
-            <path d="M21 21l-4.35-4.35" stroke="#0b1220" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="11" cy="11" r="6" stroke="#0b1220" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M21 21l-4.35-4.35" stroke="#e6eef6" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="11" cy="11" r="6" stroke="#e6eef6" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <input id="headerSearch" placeholder="ابحث عن اسم أو ID..." aria-label="search"/>
+          <input id="headerSearch" placeholder="ابحث باسم أو ID..." aria-label="search" />
         </div>
-
-        <button class="toggle-theme" title="الوضع">وضع حديث</button>
+        <button class="toggle-theme" title="وضع">الوضع: داكن</button>
       </div>
     </header>
 
-    <!-- MAIN GRID -->
+    <!-- main -->
     <main class="grid">
 
-      <!-- LEFT: Controls -->
+      <!-- left panel -->
       <aside class="panel" aria-labelledby="member-search">
         <h2 id="member-search">الوصول السريع للمساهم</h2>
-        <p class="lead">ادخل الـ ID الخاص بالمساهم لعرض بياناته وإدارة نقاطه.</p>
+        <p class="lead">ادخل الـ ID لعرض بيانات المساهم. (الوظائف كما هي — قمت بتحديث العرض فقط)</p>
 
         <div class="input-wrap">
           <input id="memberIdInput" placeholder="مثال: VIP2025" />
         </div>
         <button class="primary-btn" onclick="fetchMember()">عرض بياناتي</button>
 
-        <p class="small-note">لا نغير أي من وظائف النظام — تصميم العرض فقط. يمكنك استخدام حقل البحث العلوي كبديل للـ ID.</p>
-
-        <div style="height:12px"></div>
-
-        <div style="display:flex;gap:10px">
+        <div class="ghost-row">
           <button class="ghost-btn" onclick="openRedeem()">فتح نافذة الاستبدال</button>
           <button class="ghost-btn" onclick="closeRedeem()">إغلاق نافذة</button>
         </div>
       </aside>
 
-      <!-- RIGHT: Dashboard -->
+      <!-- right / dashboard -->
       <section class="dashboard">
 
-        <!-- Member Card (يتحدث ديناميكياً) -->
+        <!-- member card -->
         <div id="memberPanel" class="member-card" style="display:none">
           <div class="member-avatar" id="memberAvatar">M</div>
           <div style="flex:1">
@@ -288,7 +252,7 @@
               <div class="id" id="memberIdLabel">ID: ---</div>
               <div class="member-badges" id="memberBadges"></div>
 
-              <div class="member-stats" style="margin-top:12px">
+              <div class="stat-row">
                 <div class="stat">
                   <b id="endDate">----</b>
                   <span>تاريخ الانتهاء</span>
@@ -303,51 +267,63 @@
                 </div>
               </div>
 
-              <div class="action-row">
+              <div style="display:flex;gap:12px;align-items:center;margin-top:12px">
                 <button class="primary-btn" style="width:auto;padding:10px 14px" onclick="openRedeem()">🎯 استبدل النقاط</button>
-                <button class="ghost-btn" onclick="alert('هذه عملية تجريبية')">✉️ تواصل مع المساهم</button>
+                <button class="ghost-btn" onclick="alert('إرسال رسالة تجريبية')">✉️ تواصل</button>
+
+                <!-- progress circles -->
+                <div class="progress-wrap" aria-hidden="true">
+                  <div class="progress" id="daysProgress">
+                    <!-- SVG injected in JS -->
+                    <div class="label"><span id="daysPct">0%</span><span class="sub">مدة</span></div>
+                  </div>
+
+                  <div class="progress" id="pointsProgress">
+                    <div class="label"><span id="pointsPct">0%</span><span class="sub">نقاط</span></div>
+                  </div>
+                </div>
+
               </div>
+
             </div>
           </div>
         </div>
 
-        <!-- Features -->
-        <div class="features-section">
+        <!-- features -->
+        <div class="features">
           <div class="features-head">
             <h4>⭐ ميزات المساهم</h4>
-            <div class="muted" style="font-size:13px">تصميم عصري — مرتب حسب الأهمية</div>
+            <div class="muted" style="font-size:13px">تصميم فاخر مرتّب حسب الأهمية</div>
           </div>
 
           <div id="featureList" class="features-grid">
-            <!-- تم إنشاء الكروت ديناميكياً بواسطة JS مع تأخير للـ animation -->
+            <!-- built by JS -->
           </div>
         </div>
 
-        <!-- Redeem / Catalog -->
-        <div id="redeemPanel" class="redeem-panel" style="display:none">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <!-- redeem / catalog -->
+        <div id="redeemPanel" class="redeem" style="display:none">
+          <div style="display:flex;justify-content:space-between;align-items:center">
             <h4 style="margin:0">🎯 كتالوج الاستبدال</h4>
-            <div class="muted" style="font-size:13px">استبدل نقاطك مقابل الجوائز</div>
+            <div class="muted" style="font-size:13px">استبدل نقاطك مقابل جوائز</div>
           </div>
 
-          <div id="catalog" class="catalog-grid">
-            <!-- عناصر الكتالوج تبنى ديناميكياً -->
-          </div>
+          <div id="catalog" class="catalog-grid"></div>
         </div>
 
-        <!-- Gifts -->
-        <div class="panel" style="padding:16px">
+        <!-- gifts -->
+        <div class="gifts" style="margin-top:6px">
           <h4 style="margin:0 0 8px">🎁 الهدايا والمكافآت</h4>
-          <ul id="giftList" style="margin-top:12px;color:var(--muted)"></ul>
+          <ul id="giftList"></ul>
         </div>
 
       </section>
     </main>
   </div>
 
-  <!-- ===== JavaScript (لا تغييرات في الوظائف الأساسية) ===== -->
+  <!-- ===== JavaScript (وظائف دون تغيير جوهري) ===== -->
   <script>
-    /* === DATA & CATALOG (كما في النسخة السابقة) === */
+    /* ========== Data (مثل النسخة السابقة) ========== */
     const CATALOG = [
       { id: 'P_SMALL', name: 'عطر صغير 5 مل', cost: 50, desc: 'عطر صغير يمكن استبداله بالنقاط' },
       { id: 'DISCOUNT_5', name: 'خصم 5% على الطلب', cost: 40, desc: 'خصم إضافي على طلبك التالي' },
@@ -368,26 +344,48 @@
       "📢 إشعار مبكر بالعروض قبل يوم أو يومين"
     ];
 
-    /* === Helpers (احتفظت بنفس المنطق) === */
+    /* ===== Helpers (كما سابقاً + progress calc) ===== */
     function formatDateISO(d){
-      const dt = new Date(d);
-      if (isNaN(dt)) return "-";
+      const dt = new Date(d); if(isNaN(dt)) return "-";
       return `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`;
     }
-    function daysBetween(from,to){
-      const f=new Date(from), t=new Date(to);
-      return Math.ceil((t-f)/(1000*60*60*24));
-    }
+    function daysBetween(from,to){ const f=new Date(from), t=new Date(to); return Math.ceil((t-f)/(1000*60*60*24)); }
     function calcDaysLeft(endDate){
-      const today=new Date(); today.setHours(0,0,0,0);
-      const end=new Date(endDate); end.setHours(0,0,0,0);
+      const today=new Date(); today.setHours(0,0,0,0); const end=new Date(endDate); end.setHours(0,0,0,0);
       return daysBetween(today,end);
     }
 
-    /* === Current member holder === */
+    /* compute percents for progress circles:
+       - daysPercent: if member.startDate exists, compute passed/total; otherwise use default base (365 days)
+       - pointsPercent: relative to a max (member.pointsMax or root --max-points)
+    */
+    function computeProgressPercents(member){
+      const now = new Date(); let daysLeft = null, daysPercent = 0;
+      if(member.endDate){
+        const end = new Date(member.endDate);
+        daysLeft = calcDaysLeft(member.endDate);
+        if(member.startDate){
+          const start = new Date(member.startDate);
+          const total = Math.max(1, daysBetween(start,end));
+          const passed = Math.max(0, Math.min(total, daysBetween(start, now)));
+          daysPercent = Math.round((passed / total) * 100);
+        } else {
+          // fallback: assume a 365-day baseline
+          const total = 365;
+          const passed = Math.max(0, Math.min(total, 365 - calcDaysLeft(member.endDate)));
+          daysPercent = Math.round((passed / total) * 100);
+        }
+      }
+      const points = member.points || 0;
+      const maxPoints = member.pointsMax || parseInt(getComputedStyle(document.documentElement).getPropertyValue('--max-points')) || 500;
+      const pointsPercent = Math.round(Math.min(100, (points / maxPoints) * 100));
+      return { daysLeft, daysPercent, pointsPercent };
+    }
+
+    /* ===== Current member holder ===== */
     let CURRENT_MEMBER = null;
 
-    /* === Fetch member from contributors.json (كما كان) === */
+    /* ===== Fetch member (unchanged) ===== */
     function fetchMember(){
       const id = document.getElementById("memberIdInput").value.trim();
       if(!id){ alert("أدخل ID"); return; }
@@ -403,15 +401,19 @@
         .catch(err => alert("خطأ في تحميل البيانات: " + err));
     }
 
-    /* === Show member (وظائف كما كانت، فقط عناصر DOM مُعاد تصميمها) === */
+    /* ===== showMember (renders UI, progress circles, features, catalog) ===== */
     function showMember(member){
-      document.getElementById("memberPanel").style.display = "flex";
+      // show container
+      const panel = document.getElementById("memberPanel");
+      panel.style.display = "flex";
+
+      // basic info
       document.getElementById("memberName").textContent = member.name;
       document.getElementById("memberIdLabel").textContent = "ID: " + member.id;
       document.getElementById("endDate").textContent = formatDateISO(member.endDate);
 
       const days = calcDaysLeft(member.endDate);
-      document.getElementById("daysLeft").textContent = days>0 ? days + " يوم" : "انتهت الصلاحية";
+      document.getElementById("daysLeft").textContent = (days > 0 ? days + " يوم" : "انتهت الصلاحية");
       document.getElementById("points").textContent = member.points || 0;
 
       // avatar initial
@@ -422,16 +424,15 @@
       const badgeWrap = document.getElementById("memberBadges");
       badgeWrap.innerHTML = "";
       if(member.isVIP) badgeWrap.appendChild(createBadge("VIP"));
-      if(member.invites && member.invites>0) badgeWrap.appendChild(createBadge("دعوات VIP: " + member.invites));
+      if(member.invites && member.invites > 0) badgeWrap.appendChild(createBadge("دعوات VIP: " + member.invites));
 
       // gifts
       const giftList = document.getElementById("giftList");
       giftList.innerHTML = "";
-      if(member.gifts && member.gifts.length>0){
+      if(member.gifts && member.gifts.length > 0){
         member.gifts.forEach(g=>{
           const li = document.createElement("li");
           li.textContent = g;
-          li.style.marginBottom = "6px";
           giftList.appendChild(li);
         });
       } else {
@@ -440,12 +441,12 @@
         giftList.appendChild(li);
       }
 
-      // features (with animated reveal)
+      // features with staggered reveal
       const featureList = document.getElementById("featureList");
       featureList.innerHTML = "";
       FEATURES.forEach((f, i) => {
         const card = document.createElement("div");
-        card.className = "feature-card reveal-animate";
+        card.className = "feature-card reveal";
         card.style.animationDelay = (i * 80) + "ms";
 
         const icon = document.createElement("div");
@@ -457,7 +458,7 @@
         const title = document.createElement("h5");
         title.textContent = f.substring(f.indexOf(" ")+1);
         const desc = document.createElement("p");
-        desc.textContent = ""; // يمكنك إضافة وصف لكل ميزة هنا لو رغبت
+        desc.textContent = ""; // optional description
         body.appendChild(title);
         body.appendChild(desc);
 
@@ -466,84 +467,189 @@
         featureList.appendChild(card);
       });
 
-      // render catalog for that member
+      // render catalog
       renderCatalog(member);
-      // scroll to member panel (nice UX)
-      setTimeout(()=>{ document.getElementById("memberPanel").scrollIntoView({behavior:"smooth", block:"center"}); }, 200);
+
+      // render progress circles
+      renderProgress(member);
+
+      // scroll to panel smoothly for UX
+      setTimeout(()=> panel.scrollIntoView({behavior:'smooth', block:'center'}), 180);
     }
 
     function createBadge(text){
-      const s = document.createElement("span");
-      s.style.padding = "6px 10px";
-      s.style.background = "linear-gradient(90deg,#eef6ff,#f3f9ff)";
-      s.style.borderRadius = "10px";
-      s.style.fontWeight = "700";
-      s.style.color = "#0b1220";
-      s.style.fontSize = "12px";
-      s.textContent = text;
-      return s;
+      const el = document.createElement("span");
+      el.style.padding = "6px 10px";
+      el.style.background = "linear-gradient(90deg, rgba(212,175,55,0.12), rgba(240,201,90,0.06))";
+      el.style.border = "1px solid rgba(212,175,55,0.06)";
+      el.style.borderRadius = "8px";
+      el.style.fontWeight = "700";
+      el.style.color = "#f7f1d6";
+      el.style.fontSize = "12px";
+      el.textContent = text;
+      return el;
     }
 
-    /* === Redeem / Catalog rendering & actions (وظائف كما كانت) === */
-    function openRedeem(){
-      if(!CURRENT_MEMBER){ alert("ادخل ID أولاً"); return; }
-      const panel = document.getElementById("redeemPanel");
-      panel.style.display = "block";
-      panel.scrollIntoView({behavior:"smooth", block:"center"});
-    }
-    function closeRedeem(){ document.getElementById("redeemPanel").style.display = "none"; }
-
+    /* ===== render catalog (unchanged logic visually improved) ===== */
     function renderCatalog(member){
       const c = document.getElementById("catalog");
       c.innerHTML = "";
       CATALOG.forEach((item, idx) => {
         const box = document.createElement("div");
-        box.className = "catalog-item reveal-animate";
+        box.className = "catalog-item reveal";
         box.style.animationDelay = (idx * 90) + "ms";
 
-        const h = document.createElement("h5");
-        h.textContent = item.name;
-
-        const p = document.createElement("p");
-        p.textContent = item.desc;
-
-        const cost = document.createElement("div");
-        cost.className = "cost";
-        cost.textContent = item.cost + " نقطة";
+        const h = document.createElement("h5"); h.textContent = item.name;
+        const p = document.createElement("p"); p.textContent = item.desc;
+        const cost = document.createElement("div"); cost.className = "cost"; cost.textContent = item.cost + " نقطة";
 
         const btn = document.createElement("button");
         btn.textContent = "استبدل الآن";
         btn.onclick = () => redeemItem(member, item);
 
-        box.appendChild(h);
-        box.appendChild(p);
-        box.appendChild(cost);
-        box.appendChild(btn);
+        box.appendChild(h); box.appendChild(p); box.appendChild(cost); box.appendChild(btn);
         c.appendChild(box);
       });
     }
 
+    /* ===== redeem flow (same logic) ===== */
     function redeemItem(member, item){
       if((member.points || 0) < item.cost){ alert("رصيدك غير كافٍ للاستبدال!"); return; }
       member.points -= item.cost;
       document.getElementById("points").textContent = member.points;
+      // update progress circles visually
+      renderProgress(member);
       alert("✅ تم استبدال " + item.name + " بنجاح!");
     }
 
-    /* === Optional: hook header search to try fetch by id or name (non-invasive) === */
+    /* ===== Progress circles rendering ===== */
+    function renderProgress(member){
+      // compute percents
+      const { daysLeft, daysPercent, pointsPercent } = computeProgressPercents(member);
+
+      // days circle
+      const daysWrap = document.getElementById("daysProgress");
+      daysWrap.innerHTML = ''; // clear previous
+      const svgDays = buildCircleSVG(40, '#11182733', 'var(--gold)', daysPercent);
+      daysWrap.appendChild(svgDays);
+      document.getElementById("daysPct").textContent = daysPercent + "%";
+      // update sublabel
+      const daysSub = daysLeft !== null ? (daysLeft > 0 ? daysLeft + " يوم" : "منتهية") : '-';
+      // small accessible sub-line
+      const daysLabel = daysWrap.querySelector('.label');
+      if(daysLabel) daysLabel.innerHTML = `<span id="daysPct">${daysPercent}%</span><span class="sub">${daysSub}</span>`;
+
+      // points circle
+      const ptsWrap = document.getElementById("pointsProgress");
+      ptsWrap.innerHTML = '';
+      const svgPts = buildCircleSVG(40, '#11182733', 'var(--gold)', pointsPercent);
+      ptsWrap.appendChild(svgPts);
+      document.getElementById("pointsPct").textContent = pointsPercent + "%";
+      const ptsLabel = ptsWrap.querySelector('.label');
+      if(ptsLabel) ptsLabel.innerHTML = `<span id="pointsPct">${pointsPercent}%</span><span class="sub">${member.points || 0} نقطة</span>`;
+    }
+
+    // helper builds an SVG circular progress (radius r, bgColor, strokeColor, percent)
+    function buildCircleSVG(r, bgColor, strokeCSSVar, percent){
+      const size = (r * 2) + 6; // padding for stroke
+      const strokeWidth = 6;
+      const radius = r;
+      const circumference = 2 * Math.PI * radius;
+      const offset = circumference * (1 - (Math.max(0, Math.min(100, percent)) / 100));
+      // create svg
+      const ns = "http://www.w3.org/2000/svg";
+      const svg = document.createElementNS(ns, "svg");
+      svg.setAttribute("width", size);
+      svg.setAttribute("height", size);
+      svg.setAttribute("viewBox", `0 0 ${size} ${size}`);
+      // background circle
+      const bg = document.createElementNS(ns, "circle");
+      bg.setAttribute("cx", size/2);
+      bg.setAttribute("cy", size/2);
+      bg.setAttribute("r", radius);
+      bg.setAttribute("fill", "none");
+      bg.setAttribute("stroke", bgColor);
+      bg.setAttribute("stroke-width", strokeWidth);
+      // foreground
+      const fg = document.createElementNS(ns, "circle");
+      fg.setAttribute("cx", size/2);
+      fg.setAttribute("cy", size/2);
+      fg.setAttribute("r", radius);
+      fg.setAttribute("fill", "none");
+      fg.setAttribute("stroke", "url(#goldGrad-"+Math.random().toString(36).slice(2,8)+")"); // gradient id unique
+      fg.setAttribute("stroke-width", strokeWidth);
+      fg.setAttribute("stroke-linecap", "round");
+      fg.setAttribute("stroke-dasharray", circumference);
+      fg.setAttribute("stroke-dashoffset", circumference);
+      // group defs for gradient
+      const defs = document.createElementNS(ns, "defs");
+      const grad = document.createElementNS(ns, "linearGradient");
+      const gid = "goldGrad-"+Math.random().toString(36).slice(2,8);
+      grad.setAttribute("id", gid);
+      grad.setAttribute("x1","0%"); grad.setAttribute("x2","100%");
+      const stop1 = document.createElementNS(ns, "stop"); stop1.setAttribute("offset","0%"); stop1.setAttribute("stop-color", getComputedStyle(document.documentElement).getPropertyValue('--gold').trim() || '#d4af37');
+      const stop2 = document.createElementNS(ns, "stop"); stop2.setAttribute("offset","100%"); stop2.setAttribute("stop-color", getComputedStyle(document.documentElement).getPropertyValue('--gold-2').trim() || '#f0c95a');
+      grad.appendChild(stop1); grad.appendChild(stop2);
+      defs.appendChild(grad);
+      fg.setAttribute("stroke", `url(#${gid})`);
+
+      svg.appendChild(defs);
+      svg.appendChild(bg);
+      svg.appendChild(fg);
+
+      // animate stroke dashoffset smoothly
+      requestAnimationFrame(() => {
+        fg.style.transition = "stroke-dashoffset 700ms cubic-bezier(.2,.9,.2,1)";
+        fg.style.strokeDashoffset = offset;
+      });
+
+      // label overlay
+      const label = document.createElement("div");
+      label.className = "label";
+      label.style.position = "absolute";
+      label.style.left = "50%";
+      label.style.top = "50%";
+      label.style.transform = "translate(-50%,-50%)";
+      label.style.textAlign = "center";
+      label.style.color = "var(--text)";
+      label.style.fontWeight = "800";
+      label.innerHTML = `<span style="font-size:12px">${percent}%</span><span style="display:block;font-size:11px;color:var(--muted);margin-top:4px"></span>`;
+
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+      wrapper.style.width = size + "px";
+      wrapper.style.height = size + "px";
+      wrapper.appendChild(svg);
+      wrapper.appendChild(label);
+
+      return wrapper;
+    }
+
+    /* ===== header search quick hook (non-invasive) ===== */
     document.getElementById("headerSearch").addEventListener("keydown", function(e){
       if(e.key === "Enter"){
         const q = this.value.trim();
         if(!q) return;
-        // حاول معالجة كـ ID أولاً، وإلا ضع القيمة حقل الـ ID ثم نفّذ fetch
         document.getElementById("memberIdInput").value = q;
         fetchMember();
       }
     });
 
-    /* === عند التحميل: إن كنت تريد عرض عناصر افتراضية يمكنك استدعاء showMember(...) هنا === */
-    // مثال تجريبي (أزل التعليق إن أردت)
-    // document.addEventListener("DOMContentLoaded", ()=>{ /* يمكن عمل fetch افتراضي هنا */ });
+    /* ===== open/close redeem panel ===== */
+    function openRedeem(){
+      if(!CURRENT_MEMBER){ alert("ادخل ID أولاً"); return; }
+      document.getElementById("redeemPanel").style.display = "block";
+      document.getElementById("redeemPanel").scrollIntoView({behavior:'smooth', block:'center'});
+    }
+    function closeRedeem(){
+      document.getElementById("redeemPanel").style.display = "none";
+    }
+
+    /* ===== Example: If you want to auto-load a sample member for preview, uncomment: =====
+    window.addEventListener('DOMContentLoaded', () => {
+      // fetchMember(); // or showMember(sampleMemberObject)
+    });
+    */
 
   </script>
 </body>
