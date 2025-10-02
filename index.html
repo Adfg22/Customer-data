@@ -8,7 +8,7 @@
 <style>
   body {
     font-family: "Cairo", sans-serif;
-    background: linear-gradient(135deg, #e6e3f7, #fffaf0);
+    background: linear-gradient(135deg, #ece9ff, #fffaf0);
     padding: 30px;
     color: #333;
     margin: 0;
@@ -16,66 +16,136 @@
 
   .card {
     background: #fff;
-    border-radius: 16px;
-    padding: 20px 24px;
+    border-radius: 18px;
+    padding: 25px;
     margin-bottom: 25px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: 0.3s;
   }
-  .card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
+  .card:hover { transform: translateY(-5px); }
 
-  .card h2, .card h3, .card h4 { margin: 0 0 15px; color: #4b2bcc; }
+  h2, h3, h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #4b2bcc;
+  }
 
   input, button {
-    padding: 12px 14px;
-    border-radius: 8px;
+    padding: 12px 16px;
+    border-radius: 10px;
     border: 1px solid #ddd;
     font-size: 1rem;
     outline: none;
-    transition: all 0.3s;
+    transition: 0.3s;
     width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
   input:focus { border-color: #7b3cff; box-shadow: 0 0 8px rgba(123,60,255,0.2); }
 
   button {
-    background: linear-gradient(45deg,#7b3cff,#9d5fff);
+    background: linear-gradient(45deg, #7b3cff, #9d5fff);
     color: #fff;
     font-weight: bold;
     border: none;
     cursor: pointer;
-    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(123,60,255,0.3);
   }
-  button:hover { background: linear-gradient(45deg,#9d5fff,#7b3cff); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(123,60,255,0.3); }
+  button:hover { background: linear-gradient(45deg, #9d5fff, #7b3cff); transform: translateY(-2px); }
+
+  .btn-small {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+  }
 
   .secondary {
     background: #eee;
     color: #333;
     font-weight: normal;
+    box-shadow: none;
   }
   .secondary:hover { background: #ddd; }
 
-  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
-  .badge { padding: 6px 12px; background: linear-gradient(45deg,#f3f5ff,#e0e4ff); color:#5a2bb3; border-radius: 12px; font-size: 0.9rem; font-weight: 600; box-shadow: 0 2px 8px rgba(90,43,179,0.2); }
+  .badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  .badge {
+    padding: 6px 12px;
+    background: linear-gradient(45deg,#f3f5ff,#e0e4ff);
+    color:#5a2bb3;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(90,43,179,0.2);
+  }
 
-  ul { padding-left: 20px; margin: 10px 0; }
-  li { margin-bottom: 8px; line-height: 1.5; }
   .muted { color: #777; font-size: 0.9rem; }
 
+  /* 📊 Info Boxes */
   .info-boxes { display:flex; flex-wrap:wrap; gap:15px; margin:15px 0; }
-  .box-info { flex:1; min-width:150px; background:#fff; border-radius:12px; padding:16px; text-align:center; box-shadow:0 6px 15px rgba(0,0,0,0.08); }
+  .box-info { flex:1; min-width:150px; background:#fff; border-radius:14px; padding:16px; text-align:center; box-shadow:0 6px 15px rgba(0,0,0,0.08); transition:0.3s; }
+  .box-info:hover { transform: translateY(-3px); }
   .box-info b { display:block; margin-bottom:6px; color:#4b2bcc; }
   .box-info span { font-size:1.1rem; font-weight:bold; color:#333; }
 
-  .features-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:15px; margin-top:15px; }
-  .feature-box { background:linear-gradient(135deg,#f9f7ff,#f0f0ff); border:1px solid #ddd; border-radius:14px; padding:14px; display:flex; align-items:center; gap:10px; box-shadow:0 6px 14px rgba(0,0,0,0.06); font-size:0.95rem; font-weight:600; color:#333; }
+  /* ✅ الميزات */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+    gap: 15px;
+    margin-top: 15px;
+  }
+  .feature-box {
+    background: linear-gradient(135deg,#f9f7ff,#f0f0ff);
+    border-radius: 14px;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+  .feature-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(123,60,255,0.2);
+  }
+  .feature-emoji {
+    font-size: 1.5rem;
+  }
 
-  /* ✅ كتالوج الاستبدال */
-  #redeemPanel { margin-top:20px; padding:16px; background:#fafaff; border:1px solid #ddd; border-radius:12px; box-shadow:0 6px 14px rgba(0,0,0,0.08); }
-  .catalog-item { background:#fff; padding:14px; border-radius:10px; margin-bottom:12px; box-shadow:0 4px 10px rgba(0,0,0,0.05); display:flex; justify-content:space-between; align-items:center; }
-  .catalog-item b { color:#4b2bcc; display:block; }
-  .catalog-item span { color:#333; font-size:0.9rem; }
+  /* 🎯 كتالوج الاستبدال */
+  #redeemPanel {
+    margin-top: 20px;
+    padding: 20px;
+    background: #fafaff;
+    border: 1px solid #ddd;
+    border-radius: 14px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+  }
+  .catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+    gap: 15px;
+  }
+  .catalog-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: 0.3s;
+  }
+  .catalog-item:hover { transform: translateY(-3px); }
+  .catalog-item h5 { margin:0; color:#4b2bcc; font-size:1rem; }
+  .catalog-item p { margin:0; font-size:0.85rem; color:#555; }
+  .catalog-item .cost { color:#000; font-weight:bold; margin-top:4px; }
 </style>
 </head>
 <body>
@@ -101,9 +171,9 @@
   <button onclick="openRedeem()">🎯 استبدل النقاط</button>
 
   <div id="redeemPanel" style="display:none">
-    <h4>استبدال النقاط بـ:</h4>
-    <div id="catalog"></div>
-    <button class="secondary" onclick="closeRedeem()">إغلاق نافذة الاستبدال</button>
+    <h4>كتالوج الاستبدال</h4>
+    <div id="catalog" class="catalog-grid"></div>
+    <button class="secondary" onclick="closeRedeem()">إغلاق</button>
   </div>
 
   <h4>الهدايا والمكافآت:</h4>
@@ -114,9 +184,6 @@
 </div>
 
 <script>
-// =============================
-// بيانات عامة
-// =============================
 const FEATURES = [
   "🎁 خصم 15% على كل طلب لمدة سنة واحدة",
   "🌸 عطر اصلي 50 مل في كل مناسبة (عيد الفطر _ عيد الأضحى _ عيد ميلادك)",
@@ -130,7 +197,6 @@ const FEATURES = [
   "📢 إشعار مبكر بالعروض قبل يوم أو يومين"
 ];
 
-const STORAGE_KEY = "contributors_db_v1";
 const CATALOG = [
   { id: 'P_SMALL', name: 'عطر صغير 5 مل', cost: 50, desc: 'عطر صغير يمكن استبداله بالنقاط' },
   { id: 'DISCOUNT_5', name: 'خصم 5% على الطلب', cost: 40, desc: 'خصم إضافي على طلبك التالي' },
@@ -138,27 +204,9 @@ const CATALOG = [
   { id: 'FREE_50ML', name: 'عطر أصلي 50 مل (مناسبة)', cost: 400, desc: 'عطر 50 مل لمن تنطبق عليه المناسبة' },
 ];
 
-// =============================
-// دوال مساعدة
-// =============================
-function formatDateISO(d){
-  const dt = new Date(d);
-  if(isNaN(dt)) return "-";
-  return `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`;
-}
-function daysBetween(from,to){ return Math.ceil((new Date(to)-new Date(from))/(1000*60*60*24)); }
-function calcDaysLeft(endDate){
-  const today=new Date(); today.setHours(0,0,0,0);
-  const end=new Date(endDate); end.setHours(0,0,0,0);
-  return daysBetween(today,end);
-}
-function createBadge(text){ const s=document.createElement("span"); s.className="badge"; s.textContent=text; return s; }
-
-// =============================
-// نظام المساهمين
-// =============================
 let CURRENT_MEMBER=null;
 
+// ✅ جلب بيانات العضو
 function fetchMember(){
   const id=document.getElementById("memberIdInput").value.trim();
   if(!id){ alert("أدخل ID"); return; }
@@ -174,13 +222,13 @@ function fetchMember(){
     .catch(err=>alert("خطأ في تحميل البيانات: "+err));
 }
 
+// ✅ عرض بيانات العضو
 function showMember(member){
   document.getElementById("memberPanel").style.display="block";
   document.getElementById("memberName").textContent=member.name;
   document.getElementById("memberIdLabel").textContent="ID: "+member.id;
   document.getElementById("endDate").textContent=formatDateISO(member.endDate);
-  const days=calcDaysLeft(member.endDate);
-  document.getElementById("daysLeft").textContent=days>0?days+" يوم":"انتهت الصلاحية";
+  document.getElementById("daysLeft").textContent=calcDaysLeft(member.endDate)>0 ? calcDaysLeft(member.endDate)+" يوم":"انتهت الصلاحية";
   document.getElementById("points").textContent=member.points||0;
 
   const badges=document.getElementById("memberBadges"); badges.innerHTML="";
@@ -189,46 +237,51 @@ function showMember(member){
 
   const giftList=document.getElementById("giftList"); giftList.innerHTML="";
   if(member.gifts && member.gifts.length>0){
-    member.gifts.forEach(g=>{ const li=document.createElement("li"); li.textContent=g; giftList.appendChild(li); });
+    member.gifts.forEach(g=>{ let li=document.createElement("li"); li.textContent=g; giftList.appendChild(li); });
   } else giftList.innerHTML="<li>لا توجد هدايا</li>";
 
   const featureList=document.getElementById("featureList"); featureList.innerHTML="";
   FEATURES.forEach(f=>{
     const div=document.createElement("div"); div.className="feature-box";
-    const emojiSpan=document.createElement("span"); emojiSpan.textContent=f.split(" ")[0];
+    const emojiSpan=document.createElement("span"); emojiSpan.className="feature-emoji"; emojiSpan.textContent=f.split(" ")[0];
     const textSpan=document.createElement("span"); textSpan.textContent=f.substring(f.indexOf(" ")+1);
     div.appendChild(emojiSpan); div.appendChild(textSpan); featureList.appendChild(div);
   });
 }
 
-// =============================
-// نظام استبدال النقاط
-// =============================
+// ✅ نظام استبدال النقاط
 function openRedeem(){
   if(!CURRENT_MEMBER){ alert("ادخل ID أولاً"); return; }
   document.getElementById("redeemPanel").style.display="block";
-  const catalogDiv=document.getElementById("catalog");
-  catalogDiv.innerHTML="";
+  const catalogDiv=document.getElementById("catalog"); catalogDiv.innerHTML="";
   CATALOG.forEach(item=>{
     const div=document.createElement("div");
     div.className="catalog-item";
-    div.innerHTML=`<div><b>${item.name}</b><span>${item.desc}</span><br><span>التكلفة: ${item.cost} نقطة</span></div>`;
+    div.innerHTML=`
+      <h5>${item.name}</h5>
+      <p>${item.desc}</p>
+      <p class="cost">التكلفة: ${item.cost} نقطة</p>
+    `;
     const btn=document.createElement("button");
-    btn.textContent="استبدل";
+    btn.className="btn-small";
+    btn.textContent="استبدل الآن";
     btn.onclick=()=>redeemItem(item);
     div.appendChild(btn);
     catalogDiv.appendChild(div);
   });
 }
 function closeRedeem(){ document.getElementById("redeemPanel").style.display="none"; }
-
 function redeemItem(item){
   if(CURRENT_MEMBER.points<item.cost){ alert("رصيدك غير كافٍ"); return; }
   CURRENT_MEMBER.points-=item.cost;
-  alert("تم استبدال "+item.name+" ✅");
+  alert("✅ تم استبدال: "+item.name);
   document.getElementById("points").textContent=CURRENT_MEMBER.points;
 }
-</script>
 
+// ✅ أدوات مساعدة
+function formatDateISO(d){ let dt=new Date(d); if(isNaN(dt)) return "-"; return `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`; }
+function calcDaysLeft(endDate){ let today=new Date(); today.setHours(0,0,0,0); let end=new Date(endDate); end.setHours(0,0,0,0); return Math.ceil((end-today)/(1000*60*60*24)); }
+function createBadge(text){ let s=document.createElement("span"); s.className="badge"; s.textContent=text; return s; }
+</script>
 </body>
 </html>
