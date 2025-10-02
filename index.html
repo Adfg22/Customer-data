@@ -6,29 +6,43 @@
 <title>بوابة مساهمين الرهوان</title>
 
 <style>
+  /* 🟣 إعداد عام */
   body {
     font-family: "Cairo", sans-serif;
-    background: linear-gradient(135deg,#ece9ff,#fffaf0);
+    background: linear-gradient(135deg,#eae6ff,#fff8f0);
     padding: 30px;
-    color: #333;
     margin: 0;
+    color: #333;
+    animation: fadeInBody 1.2s ease-in-out;
+  }
+  @keyframes fadeInBody {
+    from {opacity:0;transform:translateY(20px);}
+    to {opacity:1;transform:translateY(0);}
   }
 
+  /* 🟣 البطاقات */
   .card {
     background: #fff;
-    border-radius: 18px;
-    padding: 24px;
+    border-radius: 20px;
+    padding: 26px;
     margin-bottom: 25px;
     box-shadow: 0 12px 28px rgba(0,0,0,0.08);
     transition: transform .3s, box-shadow .3s;
+    animation: fadeUp .8s ease forwards;
+    opacity:0;
   }
-  .card:hover { transform: translateY(-4px); box-shadow:0 16px 35px rgba(0,0,0,.12); }
+  .card:hover { transform: translateY(-6px); box-shadow:0 18px 35px rgba(0,0,0,.15); }
+  @keyframes fadeUp {
+    from {opacity:0; transform:translateY(30px);}
+    to {opacity:1; transform:translateY(0);}
+  }
 
   h2,h3,h4{margin-top:0;color:#4b2bcc}
 
+  /* 🟣 الحقول والأزرار */
   input,button {
-    padding: 12px 14px;
-    border-radius: 8px;
+    padding: 13px 14px;
+    border-radius: 10px;
     border: 1px solid #ddd;
     font-size: 1rem;
     outline: none;
@@ -37,37 +51,44 @@
     transition: all .3s;
     box-sizing:border-box;
   }
-  input:focus {border-color:#7b3cff;box-shadow:0 0 8px rgba(123,60,255,.2);}
+  input:focus {border-color:#7b3cff;box-shadow:0 0 10px rgba(123,60,255,.25);}
   button {
     background: linear-gradient(45deg,#7b3cff,#9d5fff);
     color:#fff;font-weight:bold;border:none;cursor:pointer;
-    transition:.3s;box-shadow:0 4px 12px rgba(123,60,255,.25);
+    transition:.3s;box-shadow:0 6px 18px rgba(123,60,255,.3);
   }
-  button:hover {transform:translateY(-2px);background:linear-gradient(45deg,#9d5fff,#7b3cff)}
+  button:hover {transform:translateY(-3px) scale(1.02);background:linear-gradient(45deg,#9d5fff,#7b3cff)}
 
-  /* زر ثانوي */
   .secondary{
     background:#f7f7f7;color:#444;border:1px solid #ddd;
   }
   .secondary:hover{background:#ececec;color:#222}
 
+  /* 🟣 البادجات */
   .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
   .badge{
     padding:6px 12px;background:linear-gradient(45deg,#f3f5ff,#e0e4ff);
     color:#5a2bb3;border-radius:12px;font-size:.9rem;font-weight:600;
     box-shadow:0 2px 8px rgba(90,43,179,.2);transition:.3s;
   }
-  .badge:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(90,43,179,.3)}
+  .badge:hover{transform:scale(1.1);box-shadow:0 4px 14px rgba(90,43,179,.35)}
 
+  /* 🟣 البوكسات */
   .info-boxes{display:flex;flex-wrap:wrap;gap:15px;margin:15px 0}
   .box-info{
-    flex:1;min-width:150px;background:#fff;border-radius:12px;
-    padding:16px;text-align:center;box-shadow:0 6px 15px rgba(0,0,0,.08);
+    flex:1;min-width:150px;background:#fff;border-radius:14px;
+    padding:18px;text-align:center;
+    box-shadow:0 6px 18px rgba(0,0,0,.08);
+    transform:scale(.95);opacity:0;animation:popIn .7s forwards;
+  }
+  @keyframes popIn {
+    from{opacity:0;transform:scale(.8);}
+    to{opacity:1;transform:scale(1);}
   }
   .box-info b{display:block;margin-bottom:6px;color:#4b2bcc}
-  .box-info span{font-size:1.1rem;font-weight:bold;color:#333}
+  .box-info span{font-size:1.15rem;font-weight:bold;color:#333}
 
-  /* ✅ عرض الميزات الاحترافي */
+  /* 🟣 ميزات المساهم */
   .features-grid{
     display:grid;
     grid-template-columns: repeat(auto-fill,minmax(230px,1fr));
@@ -76,54 +97,51 @@
   }
   .feature-card{
     background:#fff;
-    border-radius:16px;
+    border-radius:18px;
     padding:20px;
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    gap:12px;
-    box-shadow:0 6px 15px rgba(0,0,0,.06);
-    transition:all .3s ease;
+    display:flex;align-items:center;gap:12px;
+    box-shadow:0 6px 18px rgba(0,0,0,.06);
+    transition:.35s ease;
     border:1px solid #f0f0ff;
+    opacity:0;
+    transform:translateY(20px);
+    animation:slideIn .8s forwards;
   }
-  .feature-card:hover{
-    transform:translateY(-6px) scale(1.02);
-    box-shadow:0 10px 25px rgba(123,60,255,.25);
-    border-color:#d6cfff;
+  @keyframes slideIn {
+    to{opacity:1;transform:translateY(0);}
   }
   .feature-icon{
-    font-size:1.8rem;
+    font-size:1.7rem;
     background:linear-gradient(45deg,#7b3cff,#9d5fff);
     color:#fff;
     padding:10px;
-    border-radius:12px;
+    border-radius:14px;
     box-shadow:0 4px 10px rgba(123,60,255,.3);
+    flex-shrink:0;
   }
   .feature-title{
-    font-size:1rem;
-    font-weight:600;
-    color:#333;
-    line-height:1.4;
+    font-size:1rem;font-weight:600;color:#333;line-height:1.4;
   }
+  .feature-card:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 12px 28px rgba(123,60,255,.2)}
 
-  /* ✅ كتالوج الاستبدال */
-  #redeemPanel{margin-top:20px}
+  /* 🟣 كتالوج الاستبدال */
   .catalog{
     display:grid;
     grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-    gap:15px;
+    gap:18px;
     margin:15px 0;
   }
   .catalog-item{
     background:#fff;
     border:1px solid #eee;
-    border-radius:14px;
-    padding:16px;
-    box-shadow:0 4px 12px rgba(0,0,0,.05);
-    transition:.3s;
+    border-radius:16px;
+    padding:18px;
+    box-shadow:0 4px 14px rgba(0,0,0,.06);
+    transition:.35s;
     display:flex;flex-direction:column;justify-content:space-between;
+    animation:fadeUp .9s ease;
   }
-  .catalog-item:hover{transform:translateY(-4px);box-shadow:0 8px 18px rgba(0,0,0,.1)}
+  .catalog-item:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 10px 20px rgba(0,0,0,.1)}
   .catalog-item h5{margin:0 0 8px;color:#4b2bcc}
   .catalog-item p{margin:0 0 12px;color:#666;font-size:.9rem;line-height:1.4}
   .catalog-item button{margin-top:auto}
@@ -132,7 +150,7 @@
 <body>
 
 <div class="card">
-  <h2>أدخل ID الخاص بك</h2>
+  <h2>🔑 أدخل ID الخاص بك</h2>
   <input type="text" id="memberIdInput" placeholder="مثال: VIP2025">
   <button onclick="fetchMember()">عرض بياناتي</button>
 </div>
@@ -156,15 +174,14 @@
     <button class="secondary" onclick="closeRedeem()">إغلاق نافذة الاستبدال</button>
   </div>
 
-  <h4>الهدايا والمكافآت:</h4>
+  <h4>🎁 الهدايا والمكافآت:</h4>
   <ul id="giftList"></ul>
 
-  <h4>ميزات المساهم:</h4>
+  <h4>⭐ ميزات المساهم:</h4>
   <div id="featureList" class="features-grid"></div>
 </div>
 
 <script>
-const STORAGE_KEY="contributors_db_v1";
 const CATALOG=[
  {id:'P_SMALL',name:'عطر صغير 5 مل',cost:50,desc:'عطر صغير يمكن استبداله بالنقاط'},
  {id:'DISCOUNT_5',name:'خصم 5% على الطلب',cost:40,desc:'خصم إضافي على طلبك التالي'},
@@ -210,21 +227,17 @@ function showMember(member){
  document.getElementById("daysLeft").textContent=days>0?days+" يوم":"انتهت الصلاحية";
  document.getElementById("points").textContent=member.points||0;
 
- const badges=document.getElementById("memberBadges");
- badges.innerHTML="";
+ const badges=document.getElementById("memberBadges");badges.innerHTML="";
  if(member.isVIP)badges.appendChild(createBadge("VIP"));
  if(member.invites&&member.invites>0)badges.appendChild(createBadge("دعوات VIP: "+member.invites));
 
- const giftList=document.getElementById("giftList");
- giftList.innerHTML="";
- if(member.gifts&&member.gifts.length>0){
-   member.gifts.forEach(g=>{const li=document.createElement("li");li.textContent=g;giftList.appendChild(li);});
- } else giftList.innerHTML="<li>لا توجد هدايا</li>";
+ const giftList=document.getElementById("giftList");giftList.innerHTML="";
+ if(member.gifts&&member.gifts.length>0){member.gifts.forEach(g=>{const li=document.createElement("li");li.textContent=g;giftList.appendChild(li);});}
+ else giftList.innerHTML="<li>لا توجد هدايا</li>";
 
- const featureList=document.getElementById("featureList");
- featureList.innerHTML="";
- FEATURES.forEach(f=>{
-   const div=document.createElement("div");div.className="feature-card";
+ const featureList=document.getElementById("featureList");featureList.innerHTML="";
+ FEATURES.forEach((f,i)=>{
+   const div=document.createElement("div");div.className="feature-card";div.style.animationDelay=`${i*0.15}s`;
    const icon=document.createElement("div");icon.className="feature-icon";icon.textContent=f.split(" ")[0];
    const title=document.createElement("div");title.className="feature-title";title.textContent=f.substring(f.indexOf(" ")+1);
    div.appendChild(icon);div.appendChild(title);featureList.appendChild(div);
@@ -233,20 +246,17 @@ function showMember(member){
 }
 
 function createBadge(text){const s=document.createElement("span");s.className="badge";s.textContent=text;return s}
-
 function openRedeem(){document.getElementById("redeemPanel").style.display="block"}
 function closeRedeem(){document.getElementById("redeemPanel").style.display="none"}
 
 function renderCatalog(member){
  const c=document.getElementById("catalog");c.innerHTML="";
- CATALOG.forEach(item=>{
-   const box=document.createElement("div");box.className="catalog-item";
+ CATALOG.forEach((item,i)=>{
+   const box=document.createElement("div");box.className="catalog-item";box.style.animationDelay=`${i*0.2}s`;
    const h=document.createElement("h5");h.textContent=item.name+" ("+item.cost+" نقطة)";
    const p=document.createElement("p");p.textContent=item.desc;
-   const btn=document.createElement("button");btn.textContent="استبدل الآن";
-   btn.onclick=()=>redeemItem(member,item);
-   box.appendChild(h);box.appendChild(p);box.appendChild(btn);
-   c.appendChild(box);
+   const btn=document.createElement("button");btn.textContent="استبدل الآن";btn.onclick=()=>redeemItem(member,item);
+   box.appendChild(h);box.appendChild(p);box.appendChild(btn);c.appendChild(box);
  });
 }
 
